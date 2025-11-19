@@ -1,6 +1,6 @@
 # Portfolio Profesional - Tech Noir
 
-Portafolio profesional de alto rendimiento para Ingeniero en Sistemas con estética Tech-Noir (Cyberpunk elegante).
+Portafolio profesional para Ingeniero en Sistemas con estética Tech-Noir (Cyberpunk elegante).
 
 ## 🚀 Stack Tecnológico
 
@@ -167,12 +167,6 @@ El Dockerfile multi-stage optimiza la imagen final:
 
 ## 📄 Licencia
 
-MIT
 
 ## 👤 Autor
 
-Ingeniero en Sistemas especializado en:
-- Arquitectura de software robusta
-- Normativas de seguridad (ISO 27001/NIST)
-- Desarrollo Full Stack
-- Administración de Sistemas
