@@ -287,6 +287,14 @@ function getParticleStyle(n: number) {
   cursor: pointer;
 }
 
+/* Larger hover area for easier interaction */
+.tech-node::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  border-radius: 20px;
+}
+
 .orbit-2 .tech-node {
   width: 45px;
   height: 45px;
@@ -300,26 +308,38 @@ function getParticleStyle(n: number) {
 }
 
 .tech-node:hover {
-  transform: scale(1.2) !important;
+  transform: scale(1.3) !important;
   border-color: #00f3ff;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
   z-index: 100;
+}
+
+/* Pause ALL animations when hovering on a tech node */
+.tech-node:hover ~ .orbit,
+.orbit-item:hover ~ .orbit-item,
+.hero-visual:has(.tech-node:hover) .orbit {
+  animation-play-state: paused !important;
+}
+
+.hero-visual:has(.tech-node:hover) .tech-node {
+  animation-play-state: paused !important;
 }
 
 .tech-label {
   position: absolute;
-  bottom: -25px;
+  bottom: -28px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Fira Code', monospace;
-  font-size: 10px;
+  font-size: 11px;
   color: #fff;
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 243, 255, 0.3);
   pointer-events: none;
 }
 
