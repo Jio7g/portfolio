@@ -56,7 +56,7 @@
         </div>
       </div>
       <ClientOnly>
-        <TechSphere />
+        <HeroVisual />
       </ClientOnly>
     </header>
 
