@@ -99,35 +99,7 @@
 
         <!-- 3D Skills Visualization -->
         <div class="relative">
-          <div class="h-[500px] md:h-[600px] relative">
-            <ClientOnly>
-              <SkillsOrbit />
-            </ClientOnly>
-          </div>
 
-          <!-- Category Legend -->
-          <div class="mt-12 grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div class="glass-card p-4 rounded-lg text-center">
-              <div class="w-3 h-3 rounded-full bg-green-500 mx-auto mb-2" />
-              <p class="text-xs font-mono text-gray-400">Frontend</p>
-            </div>
-            <div class="glass-card p-4 rounded-lg text-center">
-              <div class="w-3 h-3 rounded-full bg-blue-500 mx-auto mb-2" />
-              <p class="text-xs font-mono text-gray-400">Backend</p>
-            </div>
-            <div class="glass-card p-4 rounded-lg text-center">
-              <div class="w-3 h-3 rounded-full bg-cyan-500 mx-auto mb-2" />
-              <p class="text-xs font-mono text-gray-400">DevOps</p>
-            </div>
-            <div class="glass-card p-4 rounded-lg text-center">
-              <div class="w-3 h-3 rounded-full bg-purple-500 mx-auto mb-2" />
-              <p class="text-xs font-mono text-gray-400">Database</p>
-            </div>
-            <div class="glass-card p-4 rounded-lg text-center col-span-2 md:col-span-1">
-              <div class="w-3 h-3 rounded-full bg-neonGreen mx-auto mb-2" />
-              <p class="text-xs font-mono text-gray-400">Security</p>
-            </div>
-          </div>
 
           <!-- Skills Grid (Fallback/Mobile) -->
           <div class="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -139,21 +111,6 @@
           </div>
         </div>
 
-        <!-- Tech Stats -->
-        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="glass-card p-6 rounded-xl text-center">
-            <div class="text-3xl font-bold text-neonGreen mb-2">10+</div>
-            <p class="text-gray-400 text-sm font-mono">Tecnologías Frontend</p>
-          </div>
-          <div class="glass-card p-6 rounded-xl text-center">
-            <div class="text-3xl font-bold text-neonBlue mb-2">8+</div>
-            <p class="text-gray-400 text-sm font-mono">Frameworks Backend</p>
-          </div>
-          <div class="glass-card p-6 rounded-xl text-center">
-            <div class="text-3xl font-bold text-neonPurple mb-2">5+</div>
-            <p class="text-gray-400 text-sm font-mono">Herramientas DevOps</p>
-          </div>
-        </div>
       </div>
     </section>
 
