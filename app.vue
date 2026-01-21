@@ -41,6 +41,18 @@
               Contactar
             </a>
           </div>
+          <div class="mt-4">
+            <a 
+              href="/pdf/CarlosJorvannyRamosGuerraCV.pdf" 
+              download
+              target="_blank"
+              type="application/pdf"
+              class="inline-flex items-center gap-2 px-8 py-3 bg-neonPurple/10 border border-neonPurple text-neonPurple font-mono hover:bg-neonPurple hover:text-black transition-all duration-300 rounded-sm group"
+            >
+              <Icon name="mdi:download" class="group-hover:animate-bounce" />
+              Descargar CV
+            </a>
+          </div>
         </div>
       </div>
       <ClientOnly>
@@ -97,19 +109,8 @@
           <p class="text-gray-500 font-mono text-sm">Herramientas y tecnologías que domino</p>
         </div>
 
-        <!-- 3D Skills Visualization -->
-        <div class="relative">
-
-
-          <!-- Skills Grid (Fallback/Mobile) -->
-          <div class="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            <div v-for="skill in skillsList" :key="skill" class="glass-card p-3 rounded-lg hover:border-neonBlue transition-all group">
-              <p class="text-xs font-mono text-gray-300 group-hover:text-neonBlue transition-colors text-center">
-                {{ skill }}
-              </p>
-            </div>
-          </div>
-        </div>
+        <!-- Tech Stack with Categories -->
+        <TechStack />
 
       </div>
     </section>
@@ -383,15 +384,6 @@
 
 <script setup lang="ts">
 const { projects } = useProjects()
-
-// Skills list
-const skillsList = [
-  'Python', 'Django', 'PHP', 'Laravel',
-  'Vue.js', 'Nuxt', 'Tailwind', 'HTML5', 'CSS3',
-  'JavaScript', 'TypeScript', 'Docker', 'Linux',
-  'Git', 'PostgreSQL', 'MySQL', 'Redis',
-  'ISO 27001', 'NIST'
-]
 
 // Contact form state
 const contactForm = ref({
