@@ -5,10 +5,12 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-panel border-b border-white/5">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-bold font-mono text-white tracking-tighter">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        <div class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tighter">
           <span class="text-neonBlue">&lt;</span>Jio<span class="text-neonGreen">Dev</span><span class="text-neonBlue">/&gt;</span>
         </div>
+        
+        <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-8 text-sm font-mono">
           <a href="#about" class="hover:text-neonGreen transition-colors">./PERFIL</a>
           <a href="#skills" class="hover:text-neonBlue transition-colors">./STACK</a>
@@ -16,38 +18,77 @@
           <a href="#security" class="hover:text-red-500 transition-colors">./SEGURIDAD</a>
           <a href="#contact" class="hover:text-cyan-400 transition-colors">./CONTACTO</a>
         </div>
+
+        <!-- Mobile Menu Button -->
+        <button 
+          class="md:hidden p-2 text-white hover:text-neonGreen transition-colors"
+          @click="toggleMobileMenu"
+          aria-label="Toggle menu"
+        >
+          <Icon :name="isMobileMenuOpen ? 'mdi:close' : 'mdi:menu'" class="text-2xl" />
+        </button>
       </div>
+
+      <!-- Mobile Menu Overlay -->
+      <Transition name="mobile-menu">
+        <div 
+          v-if="isMobileMenuOpen" 
+          class="md:hidden fixed inset-0 top-[65px] bg-black/95 backdrop-blur-lg z-40"
+        >
+          <div class="flex flex-col items-center justify-center h-full space-y-8 text-lg font-mono">
+            <a href="#about" class="text-gray-300 hover:text-neonGreen transition-colors" @click="closeMobileMenu">
+              <span class="text-neonGreen">01.</span> ./PERFIL
+            </a>
+            <a href="#skills" class="text-gray-300 hover:text-neonBlue transition-colors" @click="closeMobileMenu">
+              <span class="text-neonBlue">02.</span> ./STACK
+            </a>
+            <a href="#projects" class="text-gray-300 hover:text-neonPurple transition-colors" @click="closeMobileMenu">
+              <span class="text-neonPurple">03.</span> ./PROYECTOS
+            </a>
+            <a href="#security" class="text-gray-300 hover:text-red-500 transition-colors" @click="closeMobileMenu">
+              <span class="text-red-500">04.</span> ./SEGURIDAD
+            </a>
+            <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors" @click="closeMobileMenu">
+              <span class="text-cyan-400">05.</span> ./CONTACTO
+            </a>
+          </div>
+        </div>
+      </Transition>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative h-screen flex items-center pt-20 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-2 gap-12 z-10 pointer-events-none">
-        <div class="flex flex-col justify-center pointer-events-auto">
-          <div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-neonGreen border border-neonGreen/30 rounded-full w-fit bg-green-900/10">
+    <header class="relative min-h-screen flex items-center pt-20 pb-8 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 z-10 pointer-events-none">
+        <div class="flex flex-col justify-center pointer-events-auto text-center lg:text-left">
+          <div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-neonGreen border border-neonGreen/30 rounded-full w-fit bg-green-900/10 mx-auto lg:mx-0">
             SYSTEMS_INITIALIZED_v2.0
           </div>
-          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Ingeniero de <br>
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+            Ingeniero de <br class="hidden sm:block" />
             <span class="gradient-text text-glow-blue">Sistemas & Cloud</span>
           </h1>
-          <p class="text-gray-400 text-lg mb-8 max-w-lg leading-relaxed">
+          <p class="text-gray-400 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed mx-auto lg:mx-0">
             Diseño y construyo sistemas que funcionan. Me apasiona transformar ideas complejas en soluciones técnicas sólidas, desde la infraestructura hasta el código final.
           </p>
-          <div class="flex gap-4">
-            <a href="#projects" class="px-8 py-3 bg-neonBlue/10 border border-neonBlue text-neonBlue font-mono hover:bg-neonBlue hover:text-black transition-all duration-300 rounded-sm group">
+          
+          <!-- Buttons - Stack on mobile -->
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <a href="#projects" class="px-6 sm:px-8 py-3 bg-neonBlue/10 border border-neonBlue text-neonBlue font-mono hover:bg-neonBlue hover:text-black transition-all duration-300 rounded-sm group text-center">
               Ver Proyectos <Icon name="mdi:arrow-right" class="ml-2 group-hover:translate-x-1 transition-transform inline-block" />
             </a>
-            <a href="#contact" class="px-8 py-3 border border-white/10 text-white font-mono hover:bg-white/5 transition-all rounded-sm">
+            <a href="#contact" class="px-6 sm:px-8 py-3 border border-white/10 text-white font-mono hover:bg-white/5 transition-all rounded-sm text-center">
               Contactar
             </a>
           </div>
-          <div class="mt-4">
+          
+          <!-- CV Download Button -->
+          <div class="mt-4 flex justify-center lg:justify-start">
             <a 
               href="/pdf/CarlosJorvannyRamosGuerraCV.pdf" 
               download
               target="_blank"
               type="application/pdf"
-              class="inline-flex items-center gap-2 px-8 py-3 bg-neonPurple/10 border border-neonPurple text-neonPurple font-mono hover:bg-neonPurple hover:text-black transition-all duration-300 rounded-sm group"
+              class="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 bg-neonPurple/10 border border-neonPurple text-neonPurple font-mono hover:bg-neonPurple hover:text-black transition-all duration-300 rounded-sm group"
             >
               <Icon name="mdi:download" class="group-hover:animate-bounce" />
               Descargar CV
@@ -55,8 +96,12 @@
           </div>
         </div>
       </div>
+      
+      <!-- Hero Visual - Hidden on mobile, shown on large screens -->
       <ClientOnly>
-        <HeroVisual />
+        <div class="hidden lg:block">
+          <HeroVisual />
+        </div>
       </ClientOnly>
     </header>
 
@@ -135,12 +180,12 @@
     </section>
 
     <!-- Security Section -->
-    <section id="security" class="py-24 relative overflow-hidden">
+    <section id="security" class="py-16 sm:py-24 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neonGreen to-transparent opacity-30" />
 
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="glass-panel p-10 rounded-2xl border border-neonGreen/20">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="glass-panel p-6 sm:p-10 rounded-2xl border border-neonGreen/20">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <div class="inline-flex items-center gap-2 text-neonGreen mb-4 font-mono">
                 <Icon name="mdi:lock" />
@@ -176,8 +221,8 @@
               </ul>
             </div>
 
-            <!-- Terminal Preview -->
-            <div class="bg-black rounded-lg border border-gray-800 p-4 font-mono text-sm h-full shadow-lg shadow-neonGreen/5">
+            <!-- Terminal Preview - Hidden on mobile -->
+            <div class="hidden lg:block bg-black rounded-lg border border-gray-800 p-4 font-mono text-sm h-full shadow-lg shadow-neonGreen/5">
               <div class="flex gap-2 mb-4 border-b border-gray-800 pb-2">
                 <div class="w-3 h-3 rounded-full bg-red-500" />
                 <div class="w-3 h-3 rounded-full bg-yellow-500" />
@@ -204,19 +249,19 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 relative">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex items-end justify-between mb-12">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-2">
+    <section id="contact" class="py-16 sm:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12">
+          <div class="text-center sm:text-left mb-4 sm:mb-0">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               <span class="text-neonGreen">./</span> Conectemos
             </h2>
-            <p class="text-gray-500 font-mono text-sm">Siempre abierto a nuevos proyectos y colaboraciones</p>
+            <p class="text-gray-500 font-mono text-xs sm:text-sm">Siempre abierto a nuevos proyectos y colaboraciones</p>
           </div>
           <div class="hidden md:block h-px bg-gray-800 flex-grow ml-8" />
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           <!-- Contact Info Cards -->
           <div class="space-y-4">
             <div class="glass-card p-6 rounded-xl group hover:border-neonBlue transition-all">
@@ -351,8 +396,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-800 py-8">
-      <div class="max-w-7xl mx-auto px-6">
+    <footer class="border-t border-gray-800 py-6 sm:py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <div class="text-gray-500 font-mono text-sm">
             <span class="text-neonBlue">&lt;</span>JioDev<span class="text-neonBlue">/&gt;</span> © 2025
@@ -380,6 +425,17 @@
 
 <script setup lang="ts">
 const { projects } = useProjects()
+
+// Mobile menu state
+const isMobileMenuOpen = ref(false)
+
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false
+}
 
 // Contact form state
 const contactForm = ref({
