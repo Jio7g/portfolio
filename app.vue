@@ -375,10 +375,6 @@
       </div>
     </footer>
 
-    <!-- Terminal Widget -->
-    <ClientOnly>
-      <TheTerminal />
-    </ClientOnly>
   </div>
 </template>
 
