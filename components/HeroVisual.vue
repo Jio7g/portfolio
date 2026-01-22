@@ -1,5 +1,10 @@
 <template>
-  <div class="hero-visual">
+  <div 
+    class="hero-visual" 
+    :class="{ 'is-paused': isPaused }"
+    @mouseenter="pauseAnimation"
+    @mouseleave="resumeAnimation"
+  >
     <!-- Central Glowing Core -->
     <div class="central-core">
       <div class="core-inner">
@@ -18,7 +23,7 @@
         class="orbit-item"
         :style="{ '--index': index, '--total': orbit1.length }"
       >
-        <div class="tech-node group">
+        <div class="tech-node">
           <Icon :name="tech.icon" class="text-2xl" />
           <span class="tech-label">{{ tech.name }}</span>
         </div>
@@ -32,7 +37,7 @@
         class="orbit-item"
         :style="{ '--index': index, '--total': orbit2.length }"
       >
-        <div class="tech-node group">
+        <div class="tech-node">
           <Icon :name="tech.icon" class="text-xl" />
           <span class="tech-label">{{ tech.name }}</span>
         </div>
@@ -46,7 +51,7 @@
         class="orbit-item"
         :style="{ '--index': index, '--total': orbit3.length }"
       >
-        <div class="tech-node group">
+        <div class="tech-node">
           <Icon :name="tech.icon" class="text-lg" />
           <span class="tech-label">{{ tech.name }}</span>
         </div>
@@ -65,6 +70,9 @@ interface Tech {
   name: string
   icon: string
 }
+
+// State for animation control
+const isPaused = ref(false)
 
 // Inner orbit - Core technologies
 const orbit1: Tech[] = [
@@ -92,6 +100,14 @@ const orbit3: Tech[] = [
   { name: 'CSS3', icon: 'logos:css-3' },
   { name: 'PHP', icon: 'logos:php' },
 ]
+
+function pauseAnimation() {
+  isPaused.value = true
+}
+
+function resumeAnimation() {
+  isPaused.value = false
+}
 
 function getParticleStyle(n: number) {
   const delay = Math.random() * 5
@@ -121,7 +137,7 @@ function getParticleStyle(n: number) {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 @media (max-width: 768px) {
@@ -209,25 +225,39 @@ function getParticleStyle(n: number) {
   border-radius: 50%;
   border: 1px dashed rgba(255, 255, 255, 0.1);
   animation: rotate-orbit linear infinite;
+  transition: animation-play-state 0.3s ease;
+  pointer-events: none; /* Allow mouse to pass through to inner orbits */
 }
 
 .orbit-1 {
-  width: 280px;
-  height: 280px;
-  animation-duration: 90s;
+  width: 300px;
+  height: 300px;
+  animation-duration: 120s;
+  z-index: 30;
 }
 
 .orbit-2 {
-  width: 420px;
-  height: 420px;
-  animation-duration: 120s;
+  width: 460px;
+  height: 460px;
+  animation-duration: 160s;
   animation-direction: reverse;
+  z-index: 20;
 }
 
 .orbit-3 {
-  width: 560px;
-  height: 560px;
-  animation-duration: 150s;
+  width: 620px;
+  height: 620px;
+  animation-duration: 200s;
+  z-index: 10;
+}
+
+/* PAUSE ALL ANIMATIONS when .is-paused class is applied */
+.hero-visual.is-paused .orbit {
+  animation-play-state: paused;
+}
+
+.hero-visual.is-paused .tech-node {
+  animation-play-state: paused;
 }
 
 @keyframes rotate-orbit {
@@ -243,108 +273,109 @@ function getParticleStyle(n: number) {
   width: 0;
   height: 0;
   transform: rotate(calc(360deg / var(--total) * var(--index)));
+  pointer-events: none; /* Items don't capture events, only tech-nodes do */
 }
 
 .orbit-1 .orbit-item .tech-node {
-  transform: translateX(140px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate 90s linear infinite;
+  transform: translateX(150px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate-1 120s linear infinite;
 }
 
 .orbit-2 .orbit-item .tech-node {
-  transform: translateX(210px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate-reverse 120s linear infinite;
+  transform: translateX(230px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate-2 160s linear infinite;
 }
 
 .orbit-3 .orbit-item .tech-node {
-  transform: translateX(280px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate 150s linear infinite;
+  transform: translateX(310px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate-3 200s linear infinite;
 }
 
-@keyframes counter-rotate {
-  from { transform: translateX(inherit) rotate(0deg); }
-  to { transform: translateX(inherit) rotate(-360deg); }
+@keyframes counter-rotate-1 {
+  from { transform: translateX(150px) rotate(0deg); }
+  to { transform: translateX(150px) rotate(-360deg); }
 }
 
-@keyframes counter-rotate-reverse {
-  from { transform: translateX(inherit) rotate(0deg); }
-  to { transform: translateX(inherit) rotate(360deg); }
+@keyframes counter-rotate-2 {
+  from { transform: translateX(230px) rotate(0deg); }
+  to { transform: translateX(230px) rotate(360deg); }
+}
+
+@keyframes counter-rotate-3 {
+  from { transform: translateX(310px) rotate(0deg); }
+  to { transform: translateX(310px) rotate(-360deg); }
 }
 
 /* Tech Node */
 .tech-node {
   position: relative;
-  width: 50px;
-  height: 50px;
-  background: rgba(10, 10, 15, 0.9);
+  width: 56px;
+  height: 56px;
+  background: rgba(10, 10, 15, 0.95);
   border: 1px solid rgba(0, 243, 255, 0.3);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-  pointer-events: auto;
+  transition: all 0.3s ease, animation-play-state 0.3s ease;
   cursor: pointer;
-}
-
-/* Larger hover area for easier interaction */
-.tech-node::before {
-  content: '';
-  position: absolute;
-  inset: -15px;
-  border-radius: 20px;
+  pointer-events: auto !important; /* Enabled - captures hover events */
+  z-index: 50;
 }
 
 .orbit-2 .tech-node {
-  width: 45px;
-  height: 45px;
+  width: 52px;
+  height: 52px;
   border-color: rgba(0, 255, 157, 0.3);
 }
 
 .orbit-3 .tech-node {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-color: rgba(188, 19, 254, 0.3);
 }
 
 .tech-node:hover {
-  transform: scale(1.3) !important;
+  transform: translateX(150px) scale(1.4) !important;
   border-color: #00f3ff;
-  box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
-  z-index: 100;
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.7);
+  z-index: 500;
 }
 
-/* Pause ALL animations when hovering on a tech node */
-.tech-node:hover ~ .orbit,
-.orbit-item:hover ~ .orbit-item,
-.hero-visual:has(.tech-node:hover) .orbit {
-  animation-play-state: paused !important;
+.orbit-2 .tech-node:hover {
+  transform: translateX(230px) scale(1.4) !important;
+  z-index: 500;
 }
 
-.hero-visual:has(.tech-node:hover) .tech-node {
-  animation-play-state: paused !important;
+.orbit-3 .tech-node:hover {
+  transform: translateX(310px) scale(1.4) !important;
+  z-index: 500;
 }
 
 .tech-label {
   position: absolute;
-  bottom: -28px;
+  bottom: -36px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Fira Code', monospace;
-  font-size: 11px;
+  font-size: 12px;
   color: #fff;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid rgba(0, 243, 255, 0.3);
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 243, 255, 0.4);
   pointer-events: none;
+  z-index: 200;
 }
 
 .tech-node:hover .tech-label {
   opacity: 1;
+  visibility: visible;
 }
 
 /* Floating Particles */
@@ -383,14 +414,5 @@ function getParticleStyle(n: number) {
     opacity: 0;
     transform: translateY(-100px) scale(0);
   }
-}
-
-/* Pause animation on hover for better interaction */
-.hero-visual:hover .orbit {
-  animation-play-state: paused;
-}
-
-.hero-visual:hover .tech-node {
-  animation-play-state: paused;
 }
 </style>
