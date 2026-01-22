@@ -212,22 +212,22 @@ function getParticleStyle(n: number) {
 }
 
 .orbit-1 {
-  width: 220px;
-  height: 220px;
-  animation-duration: 60s;
+  width: 280px;
+  height: 280px;
+  animation-duration: 90s;
 }
 
 .orbit-2 {
-  width: 340px;
-  height: 340px;
-  animation-duration: 80s;
+  width: 420px;
+  height: 420px;
+  animation-duration: 120s;
   animation-direction: reverse;
 }
 
 .orbit-3 {
-  width: 460px;
-  height: 460px;
-  animation-duration: 100s;
+  width: 560px;
+  height: 560px;
+  animation-duration: 150s;
 }
 
 @keyframes rotate-orbit {
@@ -246,18 +246,18 @@ function getParticleStyle(n: number) {
 }
 
 .orbit-1 .orbit-item .tech-node {
-  transform: translateX(110px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate 25s linear infinite;
+  transform: translateX(140px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate 90s linear infinite;
 }
 
 .orbit-2 .orbit-item .tech-node {
-  transform: translateX(170px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate-reverse 35s linear infinite;
+  transform: translateX(210px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate-reverse 120s linear infinite;
 }
 
 .orbit-3 .orbit-item .tech-node {
-  transform: translateX(230px) rotate(calc(-360deg / var(--total) * var(--index)));
-  animation: counter-rotate 45s linear infinite;
+  transform: translateX(280px) rotate(calc(-360deg / var(--total) * var(--index)));
+  animation: counter-rotate 150s linear infinite;
 }
 
 @keyframes counter-rotate {
