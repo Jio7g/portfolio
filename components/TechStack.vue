@@ -1,11 +1,11 @@
 <template>
   <div class="tech-stack-container">
-    <!-- Category Tabs -->
-    <div class="flex flex-wrap justify-center gap-2 mb-10">
+    <!-- Category Tabs - Scrollable on mobile -->
+    <div class="flex overflow-x-auto pb-2 mb-8 sm:mb-10 scrollbar-hide sm:flex-wrap sm:justify-center gap-2">
       <button
         v-for="category in categories"
         :key="category.id"
-        class="tab-button font-mono text-sm px-5 py-2.5 rounded-lg border transition-all duration-300"
+        class="tab-button font-mono text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg border transition-all duration-300 whitespace-nowrap flex-shrink-0"
         :class="[
           activeCategory === category.id
             ? `active border-${category.color} text-${category.color} bg-${category.color}/10 shadow-glow-${category.id}`
@@ -13,7 +13,7 @@
         ]"
         @click="setActiveCategory(category.id)"
       >
-        <Icon :name="category.icon" class="inline-block mr-2" />
+        <Icon :name="category.icon" class="inline-block mr-1 sm:mr-2" />
         {{ category.label }}
       </button>
     </div>
